@@ -1,0 +1,21 @@
+{
+  "name": "whatsapp-restaurante-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "node --test tests/bot.test.js",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute whatsapp-restaurante --local --file=sql/schema.sql",
+    "db:init:remote": "wrangler d1 execute whatsapp-restaurante --remote --file=sql/schema.sql",
+    "db:migrate": "wrangler d1 execute whatsapp-restaurante --local --file=sql/migrations/0001-production.sql",
+    "db:migrate:remote": "wrangler d1 execute whatsapp-restaurante --remote --file=sql/migrations/0001-production.sql"
+  },
+  "devDependencies": {
+    "wrangler": "4.131.2"
+  }
+}

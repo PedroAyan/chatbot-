@@ -1,0 +1,55 @@
+name = "whatsapp-restaurante-bot"
+main = "src/index.js"
+compatibility_date = "2026-09-15"
+
+[vars]
+# Configure produtos reais antes de aceitar pedidos. [] não ativa catálogo de demonstração.
+PRODUCTS_JSON = '[]'
+ALLOW_DEMO_CATALOG = "false"
+SIMULATOR_ENABLED = "false"
+PIX_KEY = ""
+PIX_RECIPIENT = ""
+BUSINESS_NAME = "CONFIGURE_O_NOME_DA_EMPRESA"
+TIMEZONE = "America/Sao_Paulo"
+OPENING_HOURS = "CONFIGURE_OS_HORARIOS_DE_ATENDIMENTO"
+ADDRESS = "CONFIGURE_O_ENDERECO_COMPLETO"
+PRIVACY_CONTACT = "CONFIGURE_O_CONTATO_PARA_PRIVACIDADE"
+MENU_URL = ""
+INTERNAL_NUMBERS = ""
+WHATSAPP_API_VERSION = "v23.0"
+WHATSAPP_NOTIFICATION_TEMPLATE = ""
+WHATSAPP_TEMPLATE_LANGUAGE = "pt_BR"
+DELIVERY_BASE_FEE = "0.00"
+DELIVERY_MINUTES = "45"
+PAYMENT_PIX_LINK = ""
+
+[triggers]
+crons = ["*/1 * * * *"]
+
+# Substitua o UUID abaixo pelo database_id retornado por: npx wrangler d1 create whatsapp-restaurante
+[[d1_databases]]
+binding = "DB"
+database_name = "whatsapp-restaurante"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+[[queues.producers]]
+binding = "INCOMING_QUEUE"
+queue = "whatsapp-incoming"
+
+[[queues.consumers]]
+queue = "whatsapp-incoming"
+max_batch_size = 10
+max_retries = 5
+max_concurrency = 1
+dead_letter_queue = "whatsapp-failed"
+
+[[durable_objects.bindings]]
+name = "COORDINATOR"
+class_name = "RestaurantCoordinator"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RestaurantCoordinator"]
+
+[observability]
+enabled = true

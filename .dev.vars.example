@@ -1,0 +1,27 @@
+# Copie para .dev.vars somente para desenvolvimento local. Nunca versione o arquivo preenchido.
+# Em produção, use npx wrangler secret put NOME_DO_SEGREDO.
+# Access Token da Meta para WhatsApp Cloud API: permite enviar mensagens pelo número.
+# Obtenha no Meta Business Settings > Usuários do sistema, autorizado à WABA/número.
+# Use token de usuário do sistema adequado à produção e whatsapp_business_messaging;
+# whatsapp_business_management é necessário quando administrar recursos. Não é API key da Cloudflare.
+WHATSAPP_TOKEN="insira aqui"
+# Phone Number ID da Meta: identifica o número empresarial registrado na Cloud API.
+# Obtenha em aplicativo Meta > WhatsApp > Configuração da API. Não é o telefone nem o WABA ID.
+WHATSAPP_PHONE_NUMBER_ID="insira aqui"
+# Verify Token: segredo aleatório criado pelo dono para verificar o webhook.
+# Gere você mesmo e informe o mesmo valor no campo Verify token do webhook Meta.
+# Não é o Access Token da Meta e não é fornecido automaticamente pela plataforma.
+WHATSAPP_VERIFY_TOKEN="insira aqui"
+# App Secret da Meta: segredo do aplicativo usado para validar a assinatura HMAC do webhook.
+# Obtenha em Meta for Developers > seu aplicativo > Configurações > Básico > App Secret.
+WHATSAPP_APP_SECRET="insira aqui"
+# Token/senha do painel: segredo longo e aleatório criado pelo dono para login administrativo.
+# Gere em um gerenciador de senhas. Não é fornecido pela Meta ou pela Cloudflare.
+ADMIN_TOKEN="insira aqui"
+# Telefones autorizados da equipe: somente dígitos com país/DDD, separados por vírgulas.
+# São configuração de acesso; não são tokens de API. A equipe também precisa consentir com alertas.
+INTERNAL_NUMBERS=""
+# Nome de template aprovado no WhatsApp Manager para avisos fora da janela de 24 horas.
+WHATSAPP_NOTIFICATION_TEMPLATE=""
+# Idioma exato do template aprovado no WhatsApp Manager, por exemplo pt_BR.
+WHATSAPP_TEMPLATE_LANGUAGE=""
